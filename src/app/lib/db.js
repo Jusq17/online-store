@@ -7,6 +7,8 @@ global.mongoose = {
 };
 
 export async function dbConnect() {
+  mongoose.set('strictQuery', true);
+
   try {
     if (global.mongoose && global.mongoose.conn) {
       return global.mongoose.conn;
@@ -14,7 +16,9 @@ export async function dbConnect() {
 
       const connectionString = process.env.MONGO_DB_URI;
       mongoose.connect(connectionString, {
-        autoIndex: true,
+        dbName: 'online-store',
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
       });
 
       const promise = mongoose.connection;

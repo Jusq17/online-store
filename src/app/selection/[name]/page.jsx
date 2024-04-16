@@ -9,9 +9,11 @@ const Page = async ({ params }) => {
   return (
     <div>
       <Navigation />
-      <div className="flex-center flex-col p-4 font-bold text-xl items-center justify-evenly w-full">
+      <main className="flex flex-col font-bold text-xl items-center justify-evenly w-full p-5">
+        <div>
           <ItemPage name={params.name}/>
-      </div>
+        </div>
+      </main>
     </div>
   )
 }

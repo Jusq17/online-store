@@ -3,7 +3,6 @@
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
-import Navigation from "../(components)/navigation"
 import { useEffect, useState } from 'react'
 
 const ItemPage = ({ name }) => {

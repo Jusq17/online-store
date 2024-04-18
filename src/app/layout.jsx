@@ -1,7 +1,9 @@
-import { Inter } from "next/font/google";
-import "./globals.css";
+import { Inter } from "next/font/google"
+import "./globals.css"
+import Provider from "./(components)/Provider"
+import Navigation from "./(components)/Navigation"
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"] })
 
 export const metadata = {
   title: "Create Next App",
@@ -11,7 +13,17 @@ export const metadata = {
 const Layout = ({ children }) => {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+      <Provider>
+        <div className='main'>
+          <div className='gradient' />
+        </div>
+
+        <main className='app'>
+          {children}
+        </main>
+      </Provider>
+      </body>
     </html>
   )
 }

@@ -19,6 +19,10 @@ const UserSchema = new Schema({
   items: {
     type: Array,
     default: [],
+  },
+  cart: {
+    type: Array,
+    default: [],
   }
 });
 

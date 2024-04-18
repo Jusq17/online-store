@@ -1,6 +1,6 @@
-import Navigation from "./(components)/navigation"
+import Navigation from "./(components)/Navigation"
 
-const page = () => {
+const Index = () => {
   return (
     <div>
       <Navigation />
@@ -14,4 +14,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Index

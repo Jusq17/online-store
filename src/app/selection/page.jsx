@@ -1,9 +1,9 @@
 import Link from 'next/link'
-import Navigation from "../(components)/navigation"
+import Navigation from "../(components)/Navigation"
 import ItemList from "../(components)/itemList"
 import ItemForm from '../(components)/ItemForm'
 
-const page = async () => {
+const Selection = async () => {
 
     return (
         <div>
@@ -19,4 +19,4 @@ const page = async () => {
     )
 }
 
-export default page
+export default Selection

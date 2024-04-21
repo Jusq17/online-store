@@ -49,7 +49,7 @@ const ItemList = () => {
     return (
         <div>
             {items.map((item, index) => (
-                <ItemCard key={index} name={item.name} price={item.price} addToCart={addToCart} />
+                <ItemCard key={index} item={item} name={item.name} price={item.price} addToCart={addToCart} />
             ))}
         </div>
     )

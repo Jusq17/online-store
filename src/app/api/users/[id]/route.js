@@ -2,20 +2,21 @@ import User, {Users} from "@/app/models/userModel";
 import { dbConnect } from "@/app/lib/db";
 
 export const PATCH = async (request, { params }) => {
+
+    console.log("finding user");
+
     const item = await request.json();
 
     try {
         await dbConnect();
 
-        // Find the existing prompt by ID
-        const existingUser = await User.findById(params.id);
+        console.log(item);
 
-        if (!existingUser) {
-            return new Response("User not found", { status: 404 });
-        }
+        // Find the existing prompt by ID
+        const existingUser = await User.findOne({ email: "juseljus@gmail.com" });
 
         // Update the prompt with new data
-        existingUser.item = item;
+        existingUser.items = item;
 
         console.log(item);
         console.log(existingUser);

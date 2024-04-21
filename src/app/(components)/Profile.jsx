@@ -22,12 +22,12 @@ const Profile = ({ name, desc, data, handleEdit, handleDelete }) => {
         {data != undefined
           ?
             <div>
-            <h1>Your Items:</h1>
-            {data.map((item) => (
-              
-              <ItemCard key={item.id} name={item} />
+              <h1>Your Items:</h1>
+              {data.map((item) => (
+                
+                <ItemCard key={item} name={item} />
 
-            ))}
+              ))}
             </div>
           : 
             <h1>Loading...</h1>

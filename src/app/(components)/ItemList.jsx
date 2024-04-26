@@ -29,27 +29,10 @@ const ItemList = () => {
 
     }, [])
 
-    const addToCart = async (item) => {
-
-        console.log(session?.user)
-
-        const response = await fetch(`/users/${session?.user.id}`, {
-            method: 'PATCH',
-            body: JSON.stringify(item),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-
-        const data = await response.json()
-        console.log(data)
-    
-    }
-
     return (
         <div>
             {items.map((item, index) => (
-                <ItemCard key={index} item={item} name={item.name} price={item.price} addToCart={addToCart} />
+                <ItemCard key={index} item={item} name={item.name} price={item.price} desc={item.description} imgUrl={item.url} />
             ))}
         </div>
     )

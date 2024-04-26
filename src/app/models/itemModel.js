@@ -9,8 +9,8 @@ const itemSchema = new Schema({
     price: {
         type: Number,
     },
-    quantity: {
-        type: Number,
+    description: {
+        type: String,
     },
     url: {
         type: String,

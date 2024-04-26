@@ -15,8 +15,7 @@ export const PATCH = async (request, { params }) => {
         // Find the existing prompt by ID
         const existingUser = await User.findOne({ email: "juseljus@gmail.com" });
 
-        // Update the prompt with new data
-        existingUser.items = item;
+        existingUser.cart.push(item);
 
         console.log(item);
         console.log(existingUser);
@@ -28,6 +27,30 @@ export const PATCH = async (request, { params }) => {
         return new Response("Error Updating User", { status: 500 });
     }
 };
+
+export async function POST(request,  { params }) {
+
+    const item = await request.json();
+
+    try {
+        await dbConnect();
+
+        console.log(item);
+
+        const newUser = new User({
+            email: "email1",
+            username: "username1",
+            image: "image1",
+            items: item,
+            cart: []
+        });
+
+        await newUser.save();
+        return new Response(JSON.stringify(newUser), { status: 201 });
+    } catch (error) {
+        return new Response("Failed to create new user", { status: 500 });
+    }
+}
 
 export const GET = async (request, { params }) => {
     try {

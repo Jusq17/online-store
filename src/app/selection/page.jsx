@@ -9,8 +9,7 @@ const Selection = async () => {
         <div>
             <Navigation />
             <main className="flex flex-col font-bold text-xl items-center justify-evenly w-full p-5">
-                <h1>Selection</h1>
-                <h2>Select here</h2>
+                <h1>All Items</h1>
                 <div>
                     <ItemList />
                 </div>

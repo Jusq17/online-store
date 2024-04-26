@@ -12,6 +12,7 @@ const MyProfile = () => {
   const { data: session } = useSession()
 
   const [myItems, setMyItems] = useState([])
+  const [myCart, setMyCart] = useState([])
   console.log(myItems)
 
   useEffect(() => {
@@ -22,6 +23,7 @@ const MyProfile = () => {
       console.log(data)
 
       setMyItems(data.items)
+      setMyCart(data.cart)
     }
 
     if (session?.user.id) fetchItems()
@@ -35,7 +37,8 @@ const MyProfile = () => {
                 <Profile
                     name={session?.user.name}
                     desc={session?.user.desc}
-                    data={myItems}
+                    items={myItems}
+                    cart={myCart}
                 />
             </main>
         </div>

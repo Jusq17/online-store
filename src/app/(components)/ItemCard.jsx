@@ -1,6 +1,6 @@
 import { useSession } from "next-auth/react"
 
-const ItemCard = ({ item, name, price, desc, imgUrl }) => {
+const ItemCard = ({ item, name, price, desc, imgUrl, buy }) => {
 
   const { data: session } = useSession()
 
@@ -45,7 +45,8 @@ const ItemCard = ({ item, name, price, desc, imgUrl }) => {
             <p>{price} €</p>
             <p>{desc}</p>
             <div className="card-actions justify-end">
-            <button onClick={() => addToCart(item)} className="btn btn-primary mt-2">Add to cart</button>
+
+            { buy && ( <button onClick={() => addToCart(item)} className="btn btn-primary mt-2">Add to cart</button> )}
             </div>
         </div>
     </div>

@@ -7,6 +7,8 @@ export const PATCH = async (request, { params }) => {
 
     const item = await request.json();
 
+    buying = params.bought;
+
     try {
         await dbConnect();
 
@@ -15,7 +17,11 @@ export const PATCH = async (request, { params }) => {
         // Find the existing prompt by ID
         const existingUser = await User.findOne({ email: "juseljus@gmail.com" });
 
-        existingUser.cart.push(item);
+        if (buying) {
+            existingUser.items.push(item);
+        } else {
+            existingUser.cart.push(item);
+        }
 
         console.log(item);
         console.log(existingUser);

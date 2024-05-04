@@ -57,16 +57,15 @@ const Profile = ({ name, desc, items, cart, handleEdit, handleDelete }) => {
               <h1>Your Cart:</h1>
               {cart.map((item) => (
                 
-                <div>
-                  <ItemCard key={item.name} name={item.name} price={item.price} desc={item.description} imgUrl={item.url} buyButtonText="Buy" />
-                  <button className="btn btn-primary mb-2" onClick={() => handleBuy(item)}>Buy cart</button>
-                </div>
+                <ItemCard key={item.name} name={item.name} price={item.price} desc={item.description} imgUrl={item.url} buy={true} />
 
               ))}
+              <button className="btn btn-primary mb-2" onClick={() => handleBuy(item)}>Buy cart</button>
+              
               <h1>Your Items:</h1>
               {items.map((item) => (
                 
-                <ItemCard key={item.name} name={item.name} price={item.price} desc={item.description} imgUrl={item.url} buyButtonText="Bought" />
+                <ItemCard key={item.name} name={item.name} price={item.price} desc={item.description} imgUrl={item.url} />
 
               ))}
             </div>

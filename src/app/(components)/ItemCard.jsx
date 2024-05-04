@@ -11,30 +11,53 @@ const ItemCard = ({ item, name, price, desc, imgUrl, buy }) => {
       return
     }
 
-    try {
-      const response = await fetch(`api/users/${session.user.id}`, {
+    if (buy) {
+
+      try {
+
+          const response = await fetch(`api/users/${session.user.id}/buy`, {
+              method: 'PATCH',
+              body: JSON.stringify(item),
+              headers: {
+                  'Content-Type': 'application/json'
+              }
+          })
+
+          if (!response.ok) {
+              throw new Error(`Failed to update user: ${response.statusText}`)
+          }
+
+          const data = await response.json()
+      } catch (error) {
+        console.error("Error adding item to cart:", error)
+        // Optionally provide feedback to the user
+        // alert("Failed to add item to cart. Please try again later.");
+      }
+    }
+    
+    else {
+
+      try {
+
+        const response = await fetch(`api/users/${session.user.id}/cart`, {
           method: 'PATCH',
           body: JSON.stringify(item),
           headers: {
               'Content-Type': 'application/json'
           }
-      })
+        })
 
-      if (!response.ok) {
-          throw new Error(`Failed to update user: ${response.statusText}`)
-      }
+        if (!response.ok) {
+            throw new Error(`Failed to update user: ${response.statusText}`)
+        }
 
-      const data = await response.json()
-      console.log(data) // Log response data if needed
-
-      // Optionally provide feedback to the user
-      // alert("Item added to cart successfully!");
-    } catch (error) {
+        const data = await response.json()
+      } catch (error) {
         console.error("Error adding item to cart:", error)
         // Optionally provide feedback to the user
         // alert("Failed to add item to cart. Please try again later.");
+      }
     }
-
 }
 
   return (
@@ -46,7 +69,7 @@ const ItemCard = ({ item, name, price, desc, imgUrl, buy }) => {
             <p>{desc}</p>
             <div className="card-actions justify-end">
 
-            { buy && ( <button onClick={() => addToCart(item)} className="btn btn-primary mt-2">Add to cart</button> )}
+            { !buy && ( <button onClick={() => addToCart(item)} className="btn btn-primary mt-2">Add to cart</button> )}
             </div>
         </div>
     </div>

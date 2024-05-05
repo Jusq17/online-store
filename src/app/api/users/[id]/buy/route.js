@@ -14,7 +14,7 @@ export const PATCH = async (request, { params }) => {
         const existingUser = await User.findById(params.id);
 
         existingUser.cart = [];
-        existingUser.items.push(cart);
+        existingUser.items.push(...cart);
 
         console.log(existingUser);
 

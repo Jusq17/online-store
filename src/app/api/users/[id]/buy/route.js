@@ -5,24 +5,22 @@ export const PATCH = async (request, { params }) => {
 
     console.log("finding user");
 
-    const item = await request.json();
+    const cart = await request.json();
 
     try {
         await dbConnect();
 
-        console.log(item);
-
         // Find the existing prompt by ID
-        const existingUser = await User.findOne({ email: "juseljus@gmail.com" });
+        const existingUser = await User.findById(params.id);
 
-        existingUser.items.push(item);
+        existingUser.cart = [];
+        existingUser.items.push(cart);
 
-        console.log(item);
         console.log(existingUser);
 
         await existingUser.save();
 
-        return new Response("Successfully updated the User", { status: 200 });
+        return new Response(JSON.stringify("Successfully updated the User"), { status: 200 });
     } catch (error) {
         return new Response("Error Updating User", { status: 500 });
     }

@@ -1,12 +1,13 @@
-import Link from 'next/link'
+import { useSession } from "next-auth/react"
 
+import Link from 'next/link'
 import ItemCard from './ItemCard'
 
 const Profile = ({ name, desc, items, cart, handleEdit, handleDelete }) => {
 
-  const handleBuy = async (item) => {
+  const { data: session } = useSession()
 
-    item.bought = true
+  const handleBuy = async (item) => {
 
     if (!session || !session.user || !session.user.id) {
       console.error("User session information is missing.")
@@ -14,7 +15,7 @@ const Profile = ({ name, desc, items, cart, handleEdit, handleDelete }) => {
     }
 
     try {
-      const response = await fetch(`api/users/${session.user.id}`, {
+      const response = await fetch(`api/users/${session.user.id}/buy`, {
           method: 'PATCH',
           body: JSON.stringify(item),
           headers: {
@@ -60,7 +61,7 @@ const Profile = ({ name, desc, items, cart, handleEdit, handleDelete }) => {
                 <ItemCard key={item.name} name={item.name} price={item.price} desc={item.description} imgUrl={item.url} buy={true} />
 
               ))}
-              <button className="btn btn-primary mb-2" onClick={() => handleBuy(item)}>Buy cart</button>
+              <button className="btn btn-primary mb-2" onClick={() => handleBuy(cart)}>Buy cart</button>
               
               <h1>Your Items:</h1>
               {items.map((item) => (

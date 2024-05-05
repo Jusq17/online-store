@@ -11,9 +11,10 @@ export const PATCH = async (request, { params }) => {
         await dbConnect();
 
         console.log(item);
+        console.log(params.id)
 
         // Find the existing prompt by ID
-        const existingUser = await User.findOne({ email: "juseljus@gmail.com" });
+        const existingUser = await User.findById(params.id);
 
         existingUser.cart.push(item);
 

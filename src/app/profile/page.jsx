@@ -26,8 +26,12 @@ const MyProfile = () => {
       setMyCart(data.cart)
     }
 
-    if (session?.user.id) fetchItems()
+    if (session?.user.id) {
+      fetchItems()
+    }
   }, [session?.user.id])
+
+  console.log(myCart)
 
     return (
 

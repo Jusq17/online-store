@@ -39,6 +39,8 @@ const Profile = ({ name, desc, items, cart, handleEdit, handleDelete }) => {
     }
   }
 
+  const cartTotal = (cart.map(item => item.price)).reduce((a, b) => a + b, 0)
+
   return (
     <main className="flex flex-col font-bold text-xl items-center justify-evenly w-full p-5">
       <h1 className='head_text text-left'>{name} Profile</h1>
@@ -56,17 +58,19 @@ const Profile = ({ name, desc, items, cart, handleEdit, handleDelete }) => {
           ?
             <div>
               <h1>Your Cart:</h1>
-              {cart.map((item) => (
+              {cart.map((item, key) => (
                 
-                <ItemCard key={item.name} name={item.name} price={item.price} desc={item.description} imgUrl={item.url} buy={true} />
+                <ItemCard key={key} name={item.name} price={item.price} desc={item.description} imgUrl={item.url} buy={true} />
 
               ))}
+              
+              <h3>Total: ${cartTotal}</h3>
               <button className="btn btn-primary mb-2" onClick={() => handleBuy(cart)}>Buy cart</button>
               
               <h1>Your Items:</h1>
-              {items.map((item) => (
+              {items.map((item, key) => (
                 
-                <ItemCard key={item.name} name={item.name} price={item.price} desc={item.description} imgUrl={item.url} />
+                <ItemCard key={key} name={item.name} price={item.price} desc={item.description} imgUrl={item.url} />
 
               ))}
             </div>

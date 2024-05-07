@@ -3,41 +3,9 @@ import { useSession } from "next-auth/react"
 import Link from 'next/link'
 import ItemCard from './ItemCard'
 
-const Profile = ({ name, desc, items, cart, handleEdit, handleDelete }) => {
+const Profile = ({ name, desc, items, cart, removeFromCart, handleBuy }) => {
 
   const { data: session } = useSession()
-
-  const handleBuy = async (item) => {
-
-    if (!session || !session.user || !session.user.id) {
-      console.error("User session information is missing.")
-      return
-    }
-
-    try {
-      const response = await fetch(`api/users/${session.user.id}/buy`, {
-          method: 'PATCH',
-          body: JSON.stringify(item),
-          headers: {
-              'Content-Type': 'application/json'
-          }
-      })
-
-      if (!response.ok) {
-          throw new Error(`Failed to update user: ${response.statusText}`)
-      }
-
-      const data = await response.json()
-      console.log(data) // Log response data if needed
-
-      // Optionally provide feedback to the user
-      // alert("Item added to cart successfully!");
-    } catch (error) {
-        console.error("Error adding item to cart:", error)
-        // Optionally provide feedback to the user
-        // alert("Failed to add item to cart. Please try again later.");
-    }
-  }
 
   const cartTotal = (cart.map(item => item.price)).reduce((a, b) => a + b, 0)
 
@@ -60,7 +28,7 @@ const Profile = ({ name, desc, items, cart, handleEdit, handleDelete }) => {
               <h1>Your Cart:</h1>
               {cart.map((item, key) => (
                 
-                <ItemCard key={key} name={item.name} price={item.price} desc={item.description} imgUrl={item.url} buy={true} />
+                <ItemCard key={key} item={item} name={item.name} price={item.price} desc={item.description} imgUrl={item.url} buy="in_cart" removeFromCart={removeFromCart} />
 
               ))}
               
@@ -70,7 +38,7 @@ const Profile = ({ name, desc, items, cart, handleEdit, handleDelete }) => {
               <h1>Your Items:</h1>
               {items.map((item, key) => (
                 
-                <ItemCard key={key} name={item.name} price={item.price} desc={item.description} imgUrl={item.url} />
+                <ItemCard key={key} item={item} name={item.name} price={item.price} desc={item.description} imgUrl={item.url} />
 
               ))}
             </div>

@@ -31,8 +31,8 @@ const ItemList = () => {
 
     return (
         <div>
-            {items.map((item, index) => (
-                <ItemCard key={index} item={item} name={item.name} price={item.price} desc={item.description} imgUrl={item.url} buy={false}/>
+            {items.map((item, key) => (
+                <ItemCard key={key} item={item} name={item.name} price={item.price} desc={item.description} imgUrl={item.url} buy="not_cart" />
             ))}
         </div>
     )

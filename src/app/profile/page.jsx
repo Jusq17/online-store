@@ -31,6 +31,78 @@ const MyProfile = () => {
     }
   }, [session?.user.id])
 
+  const handleBuy = async (item) => {
+
+    if (!session || !session.user || !session.user.id) {
+      console.error("User session information is missing.")
+      return
+    }
+
+    try {
+      const response = await fetch(`api/users/${session.user.id}/buy`, {
+          method: 'PATCH',
+          body: JSON.stringify(item),
+          headers: {
+              'Content-Type': 'application/json'
+          }
+      })
+
+      if (!response.ok) {
+        throw new Error(`Failed to update user: ${response.statusText}`)
+      }
+
+      const data = await response.json()
+      console.log(data)
+
+      setMyCart([])
+      setMyItems([...myItems, ...myCart])
+
+    } catch (error) {
+        console.error("Error adding item to cart:", error)
+    }
+  }
+
+  const removeFromCart = async (item) => {
+
+    if (!session || !session.user || !session.user.id) {
+      console.error("User session information is missing.")
+      return
+    }
+
+    try {
+
+      const response = await fetch(`api/users/${session.user.id}/remove`, {
+          method: 'PATCH',
+          body: JSON.stringify(item),
+          headers: {
+              'Content-Type': 'application/json'
+          }
+      })
+
+      if (!response.ok) {
+          throw new Error(`Failed to update user: ${response.statusText}`)
+      }
+
+      const cart = myCart
+      
+      for (let i = 0; i < cart.length; i++) {
+        if (cart[i].name === item.name) {
+            cart.splice(i, 1)
+            break
+        }
+      }
+
+      setMyCart(cart)
+
+      const data = await response.json()
+
+    } catch (error) {
+      console.error("Error adding item to cart:", error)
+      // Optionally provide feedback to the user
+      // alert("Failed to add item to cart. Please try again later.");
+    }
+  }
+
   console.log(myCart)
 
     return (
@@ -43,6 +115,8 @@ const MyProfile = () => {
                     desc={session?.user.desc}
                     items={myItems}
                     cart={myCart}
+                    handleBuy={handleBuy}
+                    removeFromCart={removeFromCart}
                 />
             </main>
         </div>

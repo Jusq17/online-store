@@ -1,6 +1,6 @@
 import { useSession } from "next-auth/react"
 
-const ItemCard = ({ item, name, price, desc, imgUrl, buy }) => {
+const ItemCard = ({ item, name, price, desc, imgUrl, buy, removeFromCart }) => {
 
   const { data: session } = useSession()
 
@@ -11,54 +11,28 @@ const ItemCard = ({ item, name, price, desc, imgUrl, buy }) => {
       return
     }
 
-    if (buy) {
+    try {
 
-      try {
-
-          const response = await fetch(`api/users/${session.user.id}/buy`, {
-              method: 'PATCH',
-              body: JSON.stringify(item),
-              headers: {
-                  'Content-Type': 'application/json'
-              }
-          })
-
-          if (!response.ok) {
-              throw new Error(`Failed to update user: ${response.statusText}`)
-          }
-
-          const data = await response.json()
-      } catch (error) {
-        console.error("Error adding item to cart:", error)
-        // Optionally provide feedback to the user
-        // alert("Failed to add item to cart. Please try again later.");
-      }
-    }
-    
-    else {
-
-      try {
-
-        const response = await fetch(`api/users/${session.user.id}/cart`, {
-          method: 'PATCH',
-          body: JSON.stringify(item),
-          headers: {
-              'Content-Type': 'application/json'
-          }
-        })
-
-        if (!response.ok) {
-            throw new Error(`Failed to update user: ${response.statusText}`)
+      const response = await fetch(`api/users/${session.user.id}/cart`, {
+        method: 'PATCH',
+        body: JSON.stringify(item),
+        headers: {
+            'Content-Type': 'application/json'
         }
+      })
 
-        const data = await response.json()
-      } catch (error) {
-        console.error("Error adding item to cart:", error)
-        // Optionally provide feedback to the user
-        // alert("Failed to add item to cart. Please try again later.");
+      if (!response.ok) {
+          throw new Error(`Failed to update user: ${response.statusText}`)
       }
+
+      const data = await response.json()
+
+    } catch (error) {
+      console.error("Error adding item to cart:", error)
+      // Optionally provide feedback to the user
+      // alert("Failed to add item to cart. Please try again later.");
     }
-}
+  }
 
   return (
     <div className="card w-96 bg-base-100 shadow-xl m-5">
@@ -69,7 +43,8 @@ const ItemCard = ({ item, name, price, desc, imgUrl, buy }) => {
             <p>{desc}</p>
             <div className="card-actions justify-end">
 
-            { !buy && ( <button onClick={() => addToCart(item)} className="btn btn-primary mt-2">Add to cart</button> )}
+            { buy == "not_cart" && ( <button onClick={() => addToCart(item)} className="btn btn-primary mt-2">Add to cart</button> )}
+            { buy == "in_cart" && ( <button onClick={() => removeFromCart(item)} className="btn btn-primary mt-2">Remove</button> )}
             </div>
         </div>
     </div>

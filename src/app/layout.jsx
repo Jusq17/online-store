@@ -13,7 +13,7 @@ export const metadata = {
 const Layout = ({ children }) => {
   return (
     <html lang="en">
-      <body>
+      <body className='bg-blue-100'>
       <Provider>
         <div className='main'>
           <div className='gradient' />

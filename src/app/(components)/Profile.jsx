@@ -11,7 +11,7 @@ const Profile = ({ name, desc, items, cart, removeFromCart, handleBuy }) => {
 
   return (
     <main className="flex flex-col font-bold text-xl items-center justify-evenly w-full p-5">
-      <h1 className='head_text text-left'>{name} Profile</h1>
+      <h1 className='head_text text-left text-2xl'>{name} Profile</h1>
 
       <div className='mt-10 prompt_layout'>
         {items && items.length === 0 && cart && cart.length === 0 && (

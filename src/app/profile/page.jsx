@@ -55,7 +55,7 @@ const MyProfile = () => {
       console.log(data)
 
       setMyCart([])
-      setMyItems([...myItems, ...myCart])
+      setMyItems(data.items)
 
     } catch (error) {
         console.error("Error adding item to cart:", error)
@@ -84,17 +84,23 @@ const MyProfile = () => {
       }
 
       const cart = myCart
+
+      console.log("cart at the beginning", cart)
       
       for (let i = 0; i < cart.length; i++) {
         if (cart[i].name === item.name) {
             cart.splice(i, 1)
+            console.log("removed item from cart")
             break
         }
       }
 
-      setMyCart(cart)
+      console.log("cart at the end", cart)
 
       const data = await response.json()
+      console.log(data)
+
+      setMyCart(data)
 
     } catch (error) {
       console.error("Error adding item to cart:", error)

@@ -20,14 +20,10 @@ export const PATCH = async (request, { params }) => {
         for (let i = 0; i < existingUser.cart.length; i++) {
             if (existingUser.cart[i].name === item.name) {
                 existingUser.cart.splice(i, 1);
-                break;
+                await existingUser.save();
+                return new Response(JSON.stringify(existingUser.cart));
             }
         }
-
-        console.log(item);
-        console.log(existingUser);
-
-        await existingUser.save();
 
         return new Response(JSON.stringify("Successfully updated the User"), { status: 200 });
     } catch (error) {

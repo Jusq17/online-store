@@ -30,7 +30,7 @@ const ItemList = () => {
     }, [])
 
     return (
-        <div>
+        <div className="flex flex-row flex-wrap justify-evenly">
             {items.map((item, key) => (
                 <ItemCard key={key} item={item} name={item.name} price={item.price} desc={item.description} imgUrl={item.url} buy="not_cart" />
             ))}

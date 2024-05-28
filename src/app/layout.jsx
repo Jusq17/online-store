@@ -12,8 +12,8 @@ export const metadata = {
 
 const Layout = ({ children }) => {
   return (
-    <html lang="en">
-      <body className='bg-blue-100'>
+    <html lang="en" className="bg-slate-200">
+      <body>
       <Provider>
         <div className='main'>
           <div className='gradient' />

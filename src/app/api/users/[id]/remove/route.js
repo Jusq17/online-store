@@ -10,10 +10,7 @@ export const PATCH = async (request, { params }) => {
     try {
         await dbConnect();
 
-        console.log(item);
-        console.log(params.id)
-
-        // Find the existing prompt by ID
+        // Find the existing user by ID
         const existingUser = await User.findById(params.id);
 
         // Remove one item from the cart

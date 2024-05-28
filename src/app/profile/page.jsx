@@ -20,8 +20,6 @@ const MyProfile = () => {
       const response = await fetch(`/api/users/${session?.user.id}`)
       const data = await response.json()
 
-      console.log(data)
-
       setMyItems(data.items)
       setMyCart(data.cart)
     }
@@ -52,7 +50,6 @@ const MyProfile = () => {
       }
 
       const data = await response.json()
-      console.log(data)
 
       setMyCart([])
       setMyItems(data.items)
@@ -98,18 +95,13 @@ const MyProfile = () => {
       console.log("cart at the end", cart)
 
       const data = await response.json()
-      console.log(data)
 
       setMyCart(data)
 
     } catch (error) {
       console.error("Error adding item to cart:", error)
-      // Optionally provide feedback to the user
-      // alert("Failed to add item to cart. Please try again later.");
     }
   }
-
-  console.log(myCart)
 
     return (
 

@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation"
 
 import ItemCard from '../(components)/ItemCard'
 
-const ItemList = () => {
+const ItemList = ({ category }) => {
 
     const router = useRouter()
     const { data: session } = useSession()
@@ -17,12 +17,28 @@ const ItemList = () => {
 
         const fetchItems = async () => {
 
-            const response = await fetch('/api/items')
-            const items = await response.json()
-            console.log(items)
-            console.log(session?.user)
+            console.log(category)
 
-            setItems(items)
+            if (category === 'all') {
+                
+                const response = await fetch('/api/items')
+                const items = await response.json()
+
+                console.log(items)
+                console.log(session?.user)
+
+                setItems(items)
+            }
+            else {
+
+                const response = await fetch(`/api/categories/${category}`)
+                const items = await response.json()
+                
+                console.log(items)
+                console.log(session?.user)
+
+                setItems(items)
+            }
         }
 
         fetchItems()

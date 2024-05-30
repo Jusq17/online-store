@@ -1,38 +1,8 @@
 import { useSession } from "next-auth/react"
 
-const ItemCard = ({ item, name, price, desc, imgUrl, buy, removeFromCart }) => {
+const ItemCard = ({ item, name, price, desc, imgUrl, buy, addToCart, removeFromCart }) => {
 
   const { data: session } = useSession()
-
-  const addToCart = async (item) => {
-
-    if (!session || !session.user || !session.user.id) {
-      console.error("User session information is missing.")
-      return
-    }
-
-    try {
-
-      const response = await fetch(`api/users/${session.user.id}/cart`, {
-        method: 'PATCH',
-        body: JSON.stringify(item),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-      })
-
-      if (!response.ok) {
-          throw new Error(`Failed to update user: ${response.statusText}`)
-      }
-
-      const data = await response.json()
-
-    } catch (error) {
-      console.error("Error adding item to cart:", error)
-      // Optionally provide feedback to the user
-      // alert("Failed to add item to cart. Please try again later.");
-    }
-  }
 
   return (
     <div className="card w-96 bg-slate-100 shadow-xl m-5">

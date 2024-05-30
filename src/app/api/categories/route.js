@@ -1,4 +1,4 @@
-// This is the API route for fetching all items in a category
+// This is the API route for fetching all categories
 
 import { dbConnect } from "@/app/lib/db";
 import Category, {Categories} from "@/app/models/categoryModel";
@@ -10,14 +10,10 @@ export const GET = async (request, { params }) => {
 
         await dbConnect();
 
-        console.log(params.category);
-        const category = await Category.findOne({ name: params.category });
+        const categories = await Category.find({});
+        const categoryNames = categories.map((category) => category.name);
 
-        console.log("category found ", category.name);
-
-        const items = category.items;
-
-        return new Response(JSON.stringify(items), { status: 200 });
+        return new Response(JSON.stringify(categoryNames), { status: 200 });
         
     } catch (error) {
         return new Response("Failed to fetch items from category", { status: 500 });

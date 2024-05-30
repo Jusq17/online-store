@@ -2,11 +2,27 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
+import { useEffect, useState } from 'react'
 import { useSession } from "next-auth/react"
 
 const Page = () => {
 
     const { data: session } = useSession()
+
+    const [categories, setCategories] = useState([])
+
+    useEffect(() => {
+
+        const fetchCategories = async () => {
+
+            const response = await fetch('/api/categories')
+            const categories = await response.json()
+
+            console.log(categories)
+        }
+
+        fetchCategories()
+    }, [])
 
     return (
       <div className="navbar bg-slate-300">
@@ -22,7 +38,19 @@ const Page = () => {
           <a className="btn btn-ghost text-2xl" href='/'>Online-store</a>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <a className="btn btn-ghost text-2xl" href='/selection'>Selection</a>
+        <ul className="menu menu-horizontal px-3">
+          <li>
+            <details>
+              <summary className="text-2xl">Selection</summary>
+              <ul className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+                <li><a href='/selection'>All items</a></li>
+                <li><a href='/categories/category1'>Category 1</a></li>
+                <li><a href='/categories/category2'>Category 2</a></li>
+                {categories.map((category, key) => ( <li key={key}><a href={`/selection/${category}`}>{category}</a></li>))}
+              </ul>
+            </details>
+          </li>
+        </ul>
         </div>
         <div className="navbar-end">
           <a className="btn" href='/profile'>Profile</a>

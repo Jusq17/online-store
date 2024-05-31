@@ -42,7 +42,7 @@ const Page = () => {
           <li>
             <details>
               <summary className="text-2xl">Selection</summary>
-              <ul className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+              <ul className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-36">
                 <li><a href='/selection'>All items</a></li>
                 <li><a href='/categories/category1'>Category 1</a></li>
                 <li><a href='/categories/category2'>Category 2</a></li>
@@ -53,7 +53,7 @@ const Page = () => {
         </ul>
         </div>
         <div className="navbar-end">
-          <a className="btn" href='/profile'>Profile</a>
+          <a className="btn mr-2" href='/profile'>Profile</a>
         </div>
       </div>
     )

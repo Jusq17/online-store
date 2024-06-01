@@ -53,7 +53,23 @@ const Page = () => {
         </ul>
         </div>
         <div className="navbar-end">
-          <a className="btn mr-2" href='/profile'>Profile</a>
+          <div className="dropdown dropdown-end">
+            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+              <div className="w-10 rounded-full">
+                <img alt="Tailwind CSS Navbar component" src="https://hwchamber.co.uk/wp-content/uploads/2022/04/avatar-placeholder.gif" />
+              </div>
+            </div>
+            <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
+              <li>
+                <a className="justify-between">
+                  Profile
+                </a>
+              </li>
+              <li><a>Your Items</a></li>
+              <li><a>Your Cart</a></li>
+              <li><a>Logout</a></li>
+            </ul>
+          </div>
         </div>
       </div>
     )

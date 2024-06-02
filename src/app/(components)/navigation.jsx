@@ -65,8 +65,8 @@ const Page = () => {
                   Profile
                 </a>
               </li>
-              <li><a>Your Items</a></li>
-              <li><a>Your Cart</a></li>
+              <li><a href='profile/items'>Your Items</a></li>
+              <li><a href='profile/cart'>Your Cart</a></li>
               <li><a>Logout</a></li>
             </ul>
           </div>

@@ -35,7 +35,7 @@ const Page = () => {
 
     try {
 
-      const response = await fetch(`api/users/${session.user.id}/remove`, {
+      const response = await fetch(`/api/users/${session.user.id}/remove`, {
           method: 'PATCH',
           body: JSON.stringify(item),
           headers: {
@@ -76,7 +76,7 @@ const Page = () => {
           <Navigation />
           <main className="flex flex-col font-bold text-xl items-center justify-evenly w-full p-5">
             <h1>Your Cart</h1>
-            <div className="flex flex-col items-center justify-evenly w-full p-5">
+            <div className="flex flex-row flex-wrap justify-evenly">
               {myCart.map((item, key) => (
                     
                 <ItemCard key={key} item={item} name={item.name} price={item.price} desc={item.description} imgUrl={item.url} buy="in_cart" removeFromCart={removeFromCart} />

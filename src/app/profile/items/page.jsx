@@ -37,11 +37,11 @@ const Page = () => {
 
     try {
       const response = await fetch(`api/users/${session.user.id}/buy`, {
-          method: 'PATCH',
-          body: JSON.stringify(item),
-          headers: {
-              'Content-Type': 'application/json'
-          }
+        method: 'PATCH',
+        body: JSON.stringify(item),
+        headers: {
+            'Content-Type': 'application/json'
+        }
       })
 
       if (!response.ok) {
@@ -53,22 +53,26 @@ const Page = () => {
       setMyItems(data.items)
 
     } catch (error) {
-        console.error("Error adding item to cart:", error)
+      console.error("Error adding item to cart:", error)
     }
   }
 
     return (
 
         <div>
-            <Navigation />
-            <main className="flex flex-col font-bold text-xl items-center justify-evenly w-full p-5">
-                <h1>Your Items</h1>
+          <Navigation />
+          <main className="flex flex-col font-bold text-xl items-center justify-evenly w-full p-5">
+            <h1 className='text-2xl to-slate-800'>Your Items</h1>
+            <div>
+              <div className="flex flex-row flex-wrap justify-evenly">
                 {myItems.map((item, key) => (
                     
-                    <ItemCard key={key} item={item} name={item.name} price={item.price} desc={item.description} imgUrl={item.url} buy="in_cart" removeFromCart={removeFromCart} />
-    
+                  <ItemCard key={key} item={item} name={item.name} price={item.price} desc={item.description} imgUrl={item.url} />
+
                 ))}
-            </main>
+              </div>
+            </div>
+          </main>
         </div>
     )
 }

@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
-import { useSession } from "next-auth/react"
+import { useSession, signOut } from "next-auth/react"
 
 const Page = () => {
 
@@ -60,14 +60,13 @@ const Page = () => {
               </div>
             </div>
             <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
-              <li>
-                <a className="justify-between">
-                  Profile
-                </a>
-              </li>
+              <li><a href='/profile' className="justify-between">Profile</a></li>
               <li><a href='/profile/items'>Your Items</a></li>
               <li><a href='/profile/cart'>Your Cart</a></li>
-              <li><a>Logout</a></li>
+              {session
+                ? <button onClick={signOut}>Logout</button>
+                : <li><a href='/api/auth/signin'>Sign in</a></li>
+              }
             </ul>
           </div>
         </div>

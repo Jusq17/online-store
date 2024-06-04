@@ -2,6 +2,7 @@ import { Inter } from "next/font/google"
 import "./globals.css"
 import Provider from "./(components)/Provider"
 import Navigation from "./(components)/Navigation"
+import Footer from "./(components)/Footer"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -18,10 +19,12 @@ const Layout = ({ children }) => {
         <div className='main'>
           <div className='gradient' />
         </div>
-
-        <main className='app'>
-          {children}
-        </main>
+        <div className="flex flex-col min-h-screen">
+          <main className='app'>
+              {children}
+          </main>
+          <Footer />
+        </div>
       </Provider>
       </body>
     </html>

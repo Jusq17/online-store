@@ -24,34 +24,36 @@ const Profile = ({ name, desc, items, cart, removeFromCart, handleBuy }) => {
                 <div>
                   <h1 className="text-2xl">Your Cart:</h1>
                   <div className='mb-8'>
-                    <div className='flex flex-row flex-wrap justify-evenly'>
-                      {cart.map((item, key) => (
-                        
+                    {cart.map((item, key) => (
+                      
+                      <div className='flex flex-row flex-wrap justify-evenly'>
                         <ItemCard key={key} item={item} name={item.name} price={item.price} desc={item.description} imgUrl={item.url} buy="in_cart" removeFromCart={removeFromCart} />
-    
-                      ))}
-                    </div>
-    
+                      </div>
+
+                    ))}
+                  </div>
+  
                     {cart.length === 0 
                     ?
-                      <h1>No items in cart</h1>
+                      <h1 className='text-center mb-8'>No items in cart</h1>
                     :
                       <div>
                         <h3>Total: ${cartTotal}</h3>
                         <button className="btn btn-primary mb-2" onClick={() => handleBuy(cart)}>Buy cart</button>
                       </div>
                     }
-                  </div>
                   
                   <h1 className="text-2xl">Your Items:</h1>
-                  <div className='flex flex-row flex-wrap justify-evenly'>
+                  <div className='mb-8'>
                     { items.length === 0 
                       ?
-                        <h1>No items owned.</h1>
+                        <h1 className='text-center'>No items owned.</h1>
                       :
                         items.map((item, key) => (
-        
-                          <ItemCard key={key} item={item} name={item.name} price={item.price} desc={item.description} imgUrl={item.url} />
+
+                          <div key={key} className='flex flex-row flex-wrap justify-evenly'>
+                            <ItemCard item={item} name={item.name} price={item.price} desc={item.description} imgUrl={item.url} />
+                          </div>
         
                         ))
                     }

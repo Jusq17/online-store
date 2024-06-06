@@ -12,9 +12,8 @@ const ItemCard = ({ item, name, price, desc, imgUrl, buy, addToCart, removeFromC
             <p>{price} €</p>
             <p>{desc}</p>
             <div className="card-actions justify-end">
-
-            { buy == "not_cart" && ( <button onClick={() => addToCart(item)} className="btn btn-primary mt-2">Add to cart</button> )}
-            { buy == "in_cart" && ( <button onClick={() => removeFromCart(item)} className="btn btn-primary mt-2">Remove</button> )}
+              { buy == "not_cart" && ( <button onClick={() => addToCart(item)} className="btn btn-primary mt-2">Add to cart</button> )}
+              { buy == "in_cart" && ( <button onClick={() => removeFromCart(item)} className="btn btn-primary mt-2">Remove</button> )}
             </div>
         </div>
     </div>

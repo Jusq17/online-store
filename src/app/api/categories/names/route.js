@@ -1,4 +1,4 @@
-// This is the API route for fetching all categories
+// This is the API route for fetching all category names
 
 import { dbConnect } from "@/app/lib/db";
 import Category, {Categories} from "@/app/models/categoryModel";

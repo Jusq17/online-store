@@ -15,7 +15,7 @@ const Page = () => {
 
         const fetchCategories = async () => {
 
-            const response = await fetch('/api/categories')
+            const response = await fetch('/api/categories/names')
             const categories = await response.json()
 
             console.log(categories)

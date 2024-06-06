@@ -23,7 +23,6 @@ const Layout = ({ children }) => {
           <main className='app'>
               {children}
           </main>
-          <Footer />
         </div>
       </Provider>
       </body>

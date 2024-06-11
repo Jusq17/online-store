@@ -1,4 +1,3 @@
-import { HttpStatusCode } from 'axios';
 import { dbConnect } from "@/app/lib/db";
 import Item, {Items} from "@/app/models/itemModel";
 

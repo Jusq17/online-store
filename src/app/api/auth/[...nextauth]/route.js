@@ -39,7 +39,9 @@ const handler = NextAuth({
             email: profile.email,
             username: profile.name.replace(" ", "").toLowerCase(),
             image: profile.picture,
-            items: []
+            balance: 100,
+            items: [],
+            cart: [],
           });
 
           console.log("New user: ", newUser);

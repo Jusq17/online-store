@@ -6,6 +6,7 @@ export const PATCH = async (request, { params }) => {
     console.log("finding user");
 
     const cart = await request.json();
+    const cartTotal = cart.reduce((acc, item) => acc + item.price, 0);
 
     try {
         await dbConnect();
@@ -15,6 +16,13 @@ export const PATCH = async (request, { params }) => {
 
         existingUser.cart = [];
         existingUser.items.push(...cart);
+
+        if (existingUser.balance < cartTotal) {
+            return new Response(JSON.stringify("Insufficient funds"), { status: 400 });
+        }
+        else {
+            existingUser.balance -= cartTotal;
+        }
 
         await existingUser.save();
 

@@ -6,14 +6,13 @@ import { useRouter } from "next/navigation"
 
 import Navigation from "../../(components)/Navigation"
 import ItemCard from "../../(components)/ItemCard"
+import Footer from "../../(components)/Footer"
 
 const Page = () => {
-  const router = useRouter()
+
   const { data: session } = useSession()
 
   const [myItems, setMyItems] = useState([])
-
-  console.log(myItems)
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -28,40 +27,11 @@ const Page = () => {
     }
   }, [session?.user.id])
 
-  const handleBuy = async (item) => {
-
-    if (!session || !session.user || !session.user.id) {
-      console.error("User session information is missing.")
-      return
-    }
-
-    try {
-      const response = await fetch(`api/users/${session.user.id}/buy`, {
-        method: 'PATCH',
-        body: JSON.stringify(item),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-      })
-
-      if (!response.ok) {
-        throw new Error(`Failed to update user: ${response.statusText}`)
-      }
-
-      const data = await response.json()
-
-      setMyItems(data.items)
-
-    } catch (error) {
-      console.error("Error adding item to cart:", error)
-    }
-  }
-
     return (
 
         <div>
           <Navigation />
-          <main className="flex flex-col font-bold text-xl items-center justify-evenly w-full p-5">
+          <main className="flex flex-col font-bold text-xl items-center w-full min-h-screen p-5">
             <h1 className='text-2xl to-slate-800'>Your Items</h1>
             <div>
               <div className="flex flex-row flex-wrap justify-evenly">
@@ -73,6 +43,7 @@ const Page = () => {
               </div>
             </div>
           </main>
+          <Footer />
         </div>
     )
 }

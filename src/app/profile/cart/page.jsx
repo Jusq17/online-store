@@ -6,9 +6,10 @@ import { useRouter } from "next/navigation"
 
 import Navigation from "../../(components)/Navigation"
 import ItemCard from "../../(components)/ItemCard"
+import Footer from "../../(components)/Footer"
 
 const Page = () => {
-  const router = useRouter()
+
   const { data: session } = useSession()
 
   const [myCart, setMyCart] = useState([])
@@ -74,8 +75,8 @@ const Page = () => {
 
         <div>
           <Navigation />
-          <main className="flex flex-col font-bold text-xl items-center justify-evenly w-full p-5">
-            <h1>Your Cart</h1>
+          <main className="flex flex-col font-bold text-xl items-center w-full min-h-screen p-5">
+            <h1 className="text-2xl">Your Cart</h1>
             <div className="flex flex-row flex-wrap justify-evenly">
               {myCart.map((item, key) => (
                     
@@ -84,6 +85,7 @@ const Page = () => {
               ))}
             </div>
           </main>
+          <Footer />
         </div>
     )
 }

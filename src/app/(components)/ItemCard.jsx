@@ -1,8 +1,5 @@
-import { useSession } from "next-auth/react"
 
 const ItemCard = ({ item, name, price, desc, imgUrl, buy, addToCart, removeFromCart }) => {
-
-  const { data: session } = useSession()
 
   return (
     <div className="card w-96 bg-slate-100 shadow-xl m-5">

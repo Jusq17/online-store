@@ -6,14 +6,16 @@ import { useRouter } from "next/navigation"
 
 import Navigation from "../(components)/Navigation"
 import Profile from "../(components)/Profile"
+import Footer from "../(components)/Footer"
 
 const MyProfile = () => {
+
   const router = useRouter()
   const { data: session } = useSession()
 
   const [myItems, setMyItems] = useState([])
   const [myCart, setMyCart] = useState([])
-  console.log(myItems)
+  const [balance, setBalance] = useState(0)
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -22,6 +24,7 @@ const MyProfile = () => {
 
       setMyItems(data.items)
       setMyCart(data.cart)
+      setBalance(data.balance)
     }
 
     if (session?.user.id) {
@@ -29,7 +32,7 @@ const MyProfile = () => {
     }
   }, [session?.user.id])
 
-  const handleBuy = async (item) => {
+  const handleBuy = async (cartItems) => {
 
     if (!session || !session.user || !session.user.id) {
       console.error("User session information is missing.")
@@ -39,7 +42,7 @@ const MyProfile = () => {
     try {
       const response = await fetch(`api/users/${session.user.id}/buy`, {
           method: 'PATCH',
-          body: JSON.stringify(item),
+          body: JSON.stringify(cartItems),
           headers: {
               'Content-Type': 'application/json'
           }
@@ -106,17 +109,18 @@ const MyProfile = () => {
     return (
 
         <div>
-            <Navigation />
-            <main className="flex flex-col font-bold text-xl items-center justify-evenly w-full p-5">
-                <Profile
-                    name={session?.user.name}
-                    desc={session?.user.desc}
-                    items={myItems}
-                    cart={myCart}
-                    handleBuy={handleBuy}
-                    removeFromCart={removeFromCart}
-                />
-            </main>
+          <Navigation />
+          <main className="flex flex-col font-bold text-xl items-center w-full min-h-screen p-5">
+            <Profile
+              name={session?.user.name}
+              items={myItems}
+              cart={myCart}
+              balance={balance}
+              handleBuy={handleBuy}
+              removeFromCart={removeFromCart}
+            />
+          </main>
+          <Footer />
         </div>
     )
 }

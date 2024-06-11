@@ -23,6 +23,10 @@ const UserSchema = new Schema({
   cart: {
     type: Array,
     default: [],
+  },
+  balance: {
+    type: Number,
+    default: 0,
   }
 });
 

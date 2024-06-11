@@ -1,8 +1,5 @@
 "use client"
 
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import Image from 'next/image'
 import { useEffect, useState } from 'react'
 
 const ItemPage = ({ name }) => {
@@ -13,7 +10,6 @@ const ItemPage = ({ name }) => {
       const fetchItem = async () => {
         const response = await fetch(`/api/selection/${name}`)
         const items = await response.json()
-        console.log(items)
   
         setItem(items)
       }

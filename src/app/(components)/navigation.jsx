@@ -1,15 +1,11 @@
 "use client"
 
-import Link from 'next/link'
-import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { useSession, signOut } from "next-auth/react"
 
 const Page = () => {
 
     const { data: session } = useSession()
-
-    const [categories, setCategories] = useState([])
 
     useEffect(() => {
 
@@ -46,7 +42,6 @@ const Page = () => {
                 <li><a href='/selection'>All items</a></li>
                 <li><a href='/categories/category1'>Category 1</a></li>
                 <li><a href='/categories/category2'>Category 2</a></li>
-                {categories.map((category, key) => ( <li key={key}><a href={`/selection/${category}`}>{category}</a></li>))}
               </ul>
             </details>
           </li>

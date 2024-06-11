@@ -2,7 +2,6 @@
 
 import { dbConnect } from "@/app/lib/db";
 import Category, {Categories} from "@/app/models/categoryModel";
-import { NextRequest, NextResponse } from 'next/server';
 
 export const GET = async (request, { params }) => {
 
